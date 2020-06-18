@@ -1,17 +1,7 @@
 ﻿# SimpleProxyBot
 
-Built from Bot Framework v4 echo bot sample.
+This sample crudely demonstrates how to forward messages from every conversation to all conversations.
 
-It demonstrates how to add users from any channel to a dictionary, then forward messages from every user to all users.
-
-## Prerequisites
-
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-
-  ```bash
-  # determine dotnet version
-  dotnet --version
-  ```
 
 
 ```cs
