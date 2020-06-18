@@ -1,20 +1,13 @@
-﻿# SimpleProxyBot
+﻿using Microsoft.Bot.Builder;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Schema;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Concurrent;
+using System.Threading;
+using System.Threading.Tasks;
 
-Built from Bot Framework v4 echo bot sample.
-
-It demonstrates how to add users from any channel to a dictionary, then forward messages from every user to all users.
-
-## Prerequisites
-
-- [.NET Core SDK](https://dotnet.microsoft.com/download) version 3.1
-
-  ```bash
-  # determine dotnet version
-  dotnet --version
-  ```
-
-
-```cs
+namespace SimpleProxyBot
+{
     public class MessageProxyService
     {
         private readonly ConcurrentDictionary<string, ConversationReference> _references = new ConcurrentDictionary<string, ConversationReference>();
@@ -55,4 +48,4 @@ It demonstrates how to add users from any channel to a dictionary, then forward 
             }
         }
     }
-```
+}

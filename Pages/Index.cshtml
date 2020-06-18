@@ -1,0 +1,59 @@
+﻿@page
+@model SimpleProxyBot.Pages.IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Web Chat</title>
+</head>
+<body>
+    
+    <div id="webchat" role="main" style="width: 450px; height: 600px; border:1px solid black; position: fixed; bottom:0; right:0"></div>
+
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat-es5.js"></script>
+
+    <script>
+
+            var dispatchEvent = function (dispatch) {
+                return function (next) {
+                    return function (action) {
+                        if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
+                            // When we receive DIRECT_LINE/CONNECT_FULFILLED action, we will send an event activity using WEB_CHAT/SEND_EVENT
+                            dispatch.dispatch({
+                                type: 'WEB_CHAT/SEND_EVENT',
+                                payload: {
+                                    name: 'webchat/join'
+                                }
+                            });
+                        }
+
+                        return next(action);
+                    }
+                }
+            };
+
+
+         const store = window.WebChat.createStore({}, dispatchEvent);
+
+        window.WebChat.renderWebChat(
+            {
+                directLine: window.WebChat.createDirectLine({
+                    token: '@Model.DLToken'
+                }),
+                store: store,
+                userID: '@Model.UserId',
+                username: '@Model.UserName'
+            },
+            document.getElementById('webchat')
+            );
+
+    </script>
+
+
+</body>
+</html>
